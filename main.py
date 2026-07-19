@@ -106,7 +106,7 @@ def list_items(path: str) -> str:
 # Gemini Client
 # -----------------------------
 client = genai.Client(
-    api_key="AIzaSyAa4iu0vJS3uY9Dd3HMYyMnOl0LF0GTvcI"
+    api_key="API_KEY_HERE"
 )
 
 chat = client.chats.create(
