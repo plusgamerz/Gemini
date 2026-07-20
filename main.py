@@ -102,6 +102,10 @@ def list_items(path: str) -> str:
     except Exception as e:
         return f"Error: {e}"
 
+def basic_terminal(command:str) -> str:
+    """basic_terminal tool can only do commands that has no input or don't have a timeout, use it carefully."""
+    return "OUTPUT: " + os.system(command)
+
 # -----------------------------
 # Gemini Client
 # -----------------------------
