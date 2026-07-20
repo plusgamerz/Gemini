@@ -51,6 +51,9 @@ chat = client.chats.create(
         system_instruction=sys_inst,
         tools=[
             ft.create_file,
+            ft.create_folder,
+            ft.copy_item,
+            ft.move_item,
             ft.delete_item,
             ft.list_items,
             name_chat,

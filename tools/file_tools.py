@@ -41,7 +41,9 @@ def copy_item(src:str, dst:str, overwrite:bool=False) -> str:
 
     return dst
 
-def move(src:str,dst:str,overite:bool=False) -> str:
+def move_item(src:str,dst:str,overite:bool=False) -> str:
+    if src == dst:
+        return "src cant't be same as dst because it now acts like delete_items."
     try:
         copy_item(src,dst,overwrite=overite)
         delete_item(src)
