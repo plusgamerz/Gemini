@@ -108,6 +108,8 @@ if __name__ == "__main__":
                         chat = start_chat(args[0],history=history)
                     else:
                         print("SYS: Model not in your API!")
+                
+                continue
 
             if not user.strip():
                 continue
