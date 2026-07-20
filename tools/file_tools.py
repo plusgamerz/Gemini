@@ -37,7 +37,7 @@ def delete_item(path: str) -> str:
     except Exception as e:
         return f"Error: {e}"
     
-def list_items(path: str) -> str:
+def list_items(path: str, filter_file:bool=False, filter_folder:bool=False) -> str:
     try:
         if not os.path.exists(path):
             return "Path does not exist."
@@ -52,9 +52,9 @@ def list_items(path: str) -> str:
         for item in items:
             full = os.path.join(path, item)
 
-            if os.path.isfile(full):
+            if os.path.isfile(full) and filter_file == False:
                 t = "File"
-            else:
+            elif os.path.isdir(full) and filter_folder == False:
                 t = "Folder"
 
             result.append(f"{item} ({t})")

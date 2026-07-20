@@ -40,11 +40,11 @@ def basic_terminal(command:str,timeout:int) -> str:
 
 # Gemini Client
 client = genai.Client(
-    api_key=os.getenv("API_KEY")
+    api_key=os.getenv("GEMINI_API_KEY")
 )
 
 chat = client.chats.create(
-    model="gemini-2.5-flash",
+    model="gemini-3.1-flash-lite",
     config=types.GenerateContentConfig(
         system_instruction=sys_inst,
         tools=[
