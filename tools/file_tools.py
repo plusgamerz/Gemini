@@ -20,6 +20,21 @@ def create_folder(path:str) -> str:
         return "Created a folder succesfully."
     except Exception as e:
         return f"Error: {e}"
+    
+def read_file(path:str, size:int=500000) -> str:
+    """The size variable limits how big file this tool can open."""
+    print("SYS: Reading a file...")
+    if os.path.isfile(path):
+        file_size = os.path.getsize(path)
+    else:
+        return "Given path not a file!"
+    
+    if file_size < size:
+        with open(path,"r") as f:
+            data = "Content of the file: " + f.read()
+        return data
+    else:
+        return "File size exceded the given limit!"
 
 def copy_item(src:str, dst:str, overwrite:bool=False) -> str:
     """This function can both copy a folder or file. Overwrite the same file or folder in the dst."""

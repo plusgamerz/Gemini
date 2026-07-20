@@ -75,6 +75,7 @@ def start_chat(model="gemini-3.1-flash-lite", history=None):
             tools=[
                 ft.create_file,
                 ft.create_folder,
+                ft.read_file,
                 ft.copy_item,
                 ft.move_item,
                 ft.delete_item,
