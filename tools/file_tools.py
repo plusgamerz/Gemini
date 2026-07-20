@@ -2,16 +2,6 @@
 import os, shutil
 
 # Tools
-def name_chat(name: str) -> str:
-    global chat_name
-
-    try:
-        os.rename(chat_name, name)
-        chat_name = name
-        return "Chat renamed successfully."
-    except Exception as e:
-        return f"Error: {e}"
-    
 def create_file(path: str, content: str) -> str:
     try:
         with open(path, "w", encoding="utf-8") as f:
@@ -19,6 +9,42 @@ def create_file(path: str, content: str) -> str:
 
         return f"Created file:\n{path}"
 
+    except Exception as e:
+        return f"Error: {e}"
+    
+def create_folder(path:str) -> str:
+    try:
+        os.mkdir(path)
+        return "Created a folder succesfully."
+    except Exception as e:
+        return f"Error: {e}"
+
+def copy_item(src:str, dst:str, overwrite:bool=False) -> str:
+    """This function can both copy a folder or file. Overwrite the same file or folder in the dst."""
+    if not os.path.exists(src):
+        raise FileNotFoundError(src)
+
+    if os.path.exists(dst):
+        if not overwrite:
+            raise FileExistsError(dst)
+
+        if os.path.isdir(dst):
+            shutil.rmtree(dst)
+        else:
+            os.remove(dst)
+
+    if os.path.isdir(src):
+        shutil.copytree(src, dst)
+    else:
+        os.makedirs(os.path.dirname(dst) or ".", exist_ok=True)
+        shutil.copy2(src, dst)
+
+    return dst
+
+def move(src:str,dst:str,overite:bool=False) -> str:
+    try:
+        copy_item(src,dst,overwrite=overite)
+        delete_item(src)
     except Exception as e:
         return f"Error: {e}"
     

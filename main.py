@@ -17,23 +17,25 @@ sys_inst = f"""# GENERAL
 
 You are an AI assistant.
 You are helpful, honest, and concise.
-
+You are required to use the name_chat function on the first message.
 You are running on a Windows 8.1 machine.
+Always try to answer as short you can and try not to repeat something.
 
 Current working directory:
 {os.getcwd()}
-
-# TOOLS
-
-Terminal:
-- start_terminal(command)
-  Starts a new cmd terminal.
-
-- input_terminal(session_id, text)
-  Sends text to the running terminal.
 """
 
 # Tools    
+def name_chat(name: str) -> str:
+    global chat_name
+
+    try:
+        os.rename(chat_name, name)
+        chat_name = name
+        return "Chat renamed successfully."
+    except Exception as e:
+        return f"Error: {e}"
+    
 def basic_terminal(command:str,timeout:int) -> str:
     """basic_terminal tool can only do commands that has no input or don't have a timeout, use it carefully and with caution."""
     return "OUTPUT: " + subprocess.run(command,shell=True,timeout=timeout)
@@ -51,7 +53,7 @@ chat = client.chats.create(
             ft.create_file,
             ft.delete_item,
             ft.list_items,
-            ft.name_chat,
+            name_chat,
         ],
     ),
 )
