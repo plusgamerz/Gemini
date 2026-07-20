@@ -5,7 +5,7 @@
 # Libraries
 from google import genai
 from google.genai import types
-from tools import file_tools as ft
+from tools import file_tools as ft, web_tool as wt
 import os
 import subprocess, json
 
@@ -31,6 +31,7 @@ Current working directory:
 
 # Tools    
 def name_chat(name: str) -> str:
+    print("SYS: Renaming chat...")
     global chat_name
 
     try:
@@ -41,11 +42,13 @@ def name_chat(name: str) -> str:
         return f"Error: {e}"
     
 def basic_terminal(command:str,user_input:str,timeout:int) -> str:
+    print("SYS: Running a command...")
     """basic_terminal tool can only do commands that has no input, use it carefully and with caution but still use it to run one command code."""
     return "OUTPUT: " + subprocess.run(command,shell=True,timeout=timeout,input=user_input)
 
 def background_terminal(command: str,user_input:str, timeout: int):
     """Same as basic_terminal but runs in bg, use it to run code or downloads."""
+    print("SYS: Creating a terminal...")
     p = subprocess.Popen(
         command,
         shell=True,
@@ -76,6 +79,9 @@ def start_chat(model="gemini-3.1-flash-lite", history=None):
                 ft.move_item,
                 ft.delete_item,
                 ft.list_items,
+                wt.web_search,
+                wt.web_search_url,
+                wt.download_web,
                 name_chat,
                 basic_terminal,
                 background_terminal

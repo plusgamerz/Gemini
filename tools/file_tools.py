@@ -3,6 +3,7 @@ import os, shutil
 
 # Tools
 def create_file(path: str, content: str) -> str:
+    print("SYS: Creating a file...")
     try:
         with open(path, "w", encoding="utf-8") as f:
             f.write(content)
@@ -13,6 +14,7 @@ def create_file(path: str, content: str) -> str:
         return f"Error: {e}"
     
 def create_folder(path:str) -> str:
+    print("SYS: Creating a folder...")
     try:
         os.mkdir(path)
         return "Created a folder succesfully."
@@ -21,6 +23,7 @@ def create_folder(path:str) -> str:
 
 def copy_item(src:str, dst:str, overwrite:bool=False) -> str:
     """This function can both copy a folder or file. Overwrite the same file or folder in the dst."""
+    print("SYS: Copying...")
     if not os.path.exists(src):
         raise FileNotFoundError(src)
 
@@ -42,6 +45,7 @@ def copy_item(src:str, dst:str, overwrite:bool=False) -> str:
     return dst
 
 def move_item(src:str,dst:str,overite:bool=False) -> str:
+    print("SYS: Moving...")
     if src == dst:
         return "src cant't be same as dst because it now acts like delete_items."
     try:
@@ -51,6 +55,7 @@ def move_item(src:str,dst:str,overite:bool=False) -> str:
         return f"Error: {e}"
     
 def delete_item(path: str) -> str:
+    print("SYS: Deleting...")
     try:
         if os.path.isfile(path):
             os.remove(path)
@@ -66,6 +71,7 @@ def delete_item(path: str) -> str:
         return f"Error: {e}"
     
 def list_items(path: str, filter_file:bool=False, filter_folder:bool=False) -> str:
+    print("SYS: Listing...")
     try:
         if not os.path.exists(path):
             return "Path does not exist."
